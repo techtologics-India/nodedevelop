@@ -1,8 +1,8 @@
 let jwt = require("jsonwebtoken");
 
-const config = require('../helper/config');
-const User = require('../modules/user/models');
-const Admin = require('../modules/admin/models');
+const config = require("../helper/config");
+const User = require("../modules/user/models");
+const Admin = require("../modules/admin/models");
 
 let loginObj = {
   getUserInfo: (req, res, next) => {
@@ -78,11 +78,10 @@ let loginObj = {
             msg = "";
           if (data.email == obj.email) {
             message = "Email/Phone is Already Exist.";
-          }
-          else if (data.phone == obj.phone) {
+          } else if (data.phone == obj.phone) {
             msg = "Email/Phone is Already Exist.";
           }
-          res.status(409).json({message, msg});
+          res.status(409).json({ message, msg });
         } else {
           next();
         }
@@ -141,23 +140,24 @@ let loginObj = {
   //     }
   //   });
   // },
-  validateUserName(username){
+  validateUserName(username) {
     const usernameRegex = /^[a-zA-Z0-9]+$/;
     return usernameRegex.test(username);
   },
 
-  validatePassword(password){
+  validatePassword(password) {
     const pwd = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$/;
     return pwd.test(password);
   },
 
-  validatePhone(phone){
+  validatePhone(phone) {
     const phoneno = /^\d{10}$/;
     return phoneno.test(phone);
   },
 
-  validateEmail(email){
-    const eml = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  validateEmail(email) {
+    const eml =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return eml.test(email);
   },
 
@@ -189,19 +189,18 @@ let loginObj = {
   verifyToken: (req, res, next) => {
     // const token = req.headers['x-access-token'];
 
-    let token = req.cookies.accessToken;
+    let token = req.body.accessToken;
+
     if (!token) {
       res.status(401).send({ auth: false, message: "No token provided." });
     } else {
       jwt.verify(token, config.secrateKey, (err, decoded) => {
         if (err) {
-          res
-            .status(500)
-            .json({
-              auth: false,
-              message: "Failed to authenticate token.",
-              error: err,
-            });
+          res.status(500).json({
+            auth: false,
+            message: "Failed to authenticate token.",
+            error: err,
+          });
         } else {
           next();
         }

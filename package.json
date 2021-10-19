@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/TechtoLogicsDevelop/zamzam-admin-backend#readme",
   "dependencies": {
-    "aws-sdk": "^2.918.0",
+    "aws-sdk": "^2.918.0", 
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
@@ -37,7 +37,7 @@
     "node-fetch": "^2.6.2",
     "nodemailer": "^6.6.1",
     "nodemailer-express-handlebars": "^4.0.0",
-    "nodemon": "^2.0.13",
+    "nodemon": "^2.0.13", 
     "twilio": "^3.67.1",
     "urlencode": "^1.1.0"
   }
